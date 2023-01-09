@@ -1,8 +1,13 @@
-import { Module } from "@nestjs/common/decorators";
-import { MongooseModule } from "@nestjs/mongoose";
-
-@Module({
-    imports: [MongooseModule.forRoot('url...')]
-})
-
-export class AppModule {}
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+declare const module: any;
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors();
+  await app.listen(3080);
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
+}
+bootstrap();
