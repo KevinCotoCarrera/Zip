@@ -14,7 +14,7 @@ export class File{
     size: number
 
     @Prop({ required: true })
-    file: BinaryData
+    data: string
 
     @Prop({default: mongoose.now()})
     createdAt: Date;
